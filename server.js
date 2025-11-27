@@ -4,18 +4,18 @@ const connectDB = require("./config/db");
 
 require("dotenv").config();
 
-connectDB();
-
 const app = express();
 
-app.get("/",(req,res)=>{
-    res.send("<h1>HELLO NODE JS !</h1>")
+
+connectDB().then(()=>{
+    const PORT = process.env.PORT || 5173 ;
+     app.listen(PORT, () => {
+      console.log(
+        `🚀 Node Server Running in ${process.env.DEV_MODE || "development"} mode on port ${PORT}`.green
+      );
+    });
 })
 
-const PORT = process.PORT || 5173;
 
-app.listen(PORT, () => {
-    console.log(
-        `Node Server Running In ${process.env.DEV_MODE} Mode on port no ${PORT}`.red
-    );
-});
+module.exports = app;
+
