@@ -1,8 +1,10 @@
 const express = require("express");
 const colors  = require("colors");
+const connectDB = require("./config/db");
 
 require("dotenv").config();
 
+connectDB();
 
 const app = express();
 
