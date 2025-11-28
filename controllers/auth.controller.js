@@ -27,14 +27,14 @@ exports.registerController = async (req, res) => {
     }
     console.log("🆕 Creating new user document...");
 
-    const newUser = new User.create({
+    const newUser = await User.create({
       firstName,
       lastName,
       email,
       password,
     });
 
-    console.log("✅ User created successfully:", newUser._id);
+    console.log("✅ User created successfully:", newUser);
 
     await newUser.save();
 
