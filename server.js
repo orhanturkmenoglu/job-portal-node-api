@@ -8,6 +8,9 @@ const morgan = require("morgan");
 const errorMiddleware = require("./middlewares/error.middleware");
 require("dotenv").config();
 
+// async route’larda try/catch yazmana gerek kalmaz, tüm hatalar otomatik global error middleware’e düşer.
+// controllerlarda try catch ihtiyacı olmaz.
+require("express-async-errors");
 const app = express();
 
 app.use(express.json());
