@@ -1,5 +1,6 @@
 const User = require("../models/user.model");
 const bcrypt = require("bcryptjs");
+const JWT = require("jsonwebtoken");
 
 exports.registerController = async (req, res, next) => {
   console.log("📩 Incoming Register Request:");
@@ -41,6 +42,60 @@ exports.registerController = async (req, res, next) => {
   return res.status(201).json({
     success: true,
     message: "User created successfully",
-    user: newUser,
+    user: {
+      id: newUser._id,
+      firstName: newUser.firstName,
+      lastName: newUser.lastName,
+      email: newUser.email,
+      location: newUser.location,
+    },
   });
+};
+
+exports.loginController = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+
+    // Validate fields
+    if (!email || !password) {
+      console.log("⚠ Missing email or password");
+      return next("Email and password are required!");
+    }
+
+    console.log("🔍 Checking user with email:", email);
+
+    // Find user and include password field
+    const user = await User.findOne({ email }).select("+password");
+    if (!user) {
+      console.warn("❌ User not found:", email);
+      return next("User not found!");
+    }
+
+    // Compare password
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      console.warn("❌ Incorrect password attempt:", email);
+      return next("Incorrect password, please try again!");
+    }
+
+    // Remove password from response
+    user.password = undefined;
+
+    // Generate JWT
+    const token = JWT.sign({ userId: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "8h",
+    });
+
+    console.log("✅ Login successful:", email);
+
+    return res.status(200).json({
+      success: true,
+      message: "Login successful",
+      user,
+      token,
+    });
+  } catch (error) {
+    console.error("❌ Login error:", error);
+    next(error);
+  }
 };

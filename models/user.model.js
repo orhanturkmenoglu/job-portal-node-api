@@ -25,6 +25,7 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: [true, "Password is Require!"],
+      select : true // geri dönüşlerde sql sorgusuna dahil edilmez
     },
     location: {
       type: String,
@@ -34,4 +35,10 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+
+/* userSchema.pre("save",async function (){
+  const salt = bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password,salt);
+})
+ */
 module.exports = mongoose.model("User", userSchema);
