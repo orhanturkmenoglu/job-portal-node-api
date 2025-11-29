@@ -4,6 +4,7 @@ const colors = require("colors");
 const connectDB = require("./config/db");
 const testRoutes = require("./routes/test.routes");
 const authRoutes = require ("./routes/auth.routes");
+const userRoutes = require('./routes/user.routes');
 const morgan = require("morgan");
 const errorMiddleware = require("./middlewares/error.middleware");
 require("dotenv").config();
@@ -21,6 +22,7 @@ app.use(morgan("dev"));
 
 app.use("/api/v1/test", testRoutes);
 app.use("/api/v1/auth",authRoutes);
+app.use("/api/v1/users",userRoutes);
 
 app.use(errorMiddleware);
 
