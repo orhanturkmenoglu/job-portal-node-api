@@ -6,6 +6,9 @@ const {
   getJobController,
   updateJobController,
   deleteJobController,
+  getUserJobsController,
+  getStatusJobsController,
+  getTopCompaniesController,
 } = require("../controllers/jobs.controller");
 
 const router = express.Router();
@@ -15,6 +18,14 @@ router.post("/create-job", userAuth, createJobController);
 
 // READ
 router.get("/", userAuth, getJobsController); // tüm kullanıcı jobları
+
+router.get("/getUserJobs", userAuth, getUserJobsController);
+
+router.get("/getStatusJobs", userAuth, getStatusJobsController);
+
+router.get("/getTopCompanies", userAuth, getTopCompaniesController);
+
+
 router.get("/:id", userAuth, getJobController); // tek job
 
 // UPDATE

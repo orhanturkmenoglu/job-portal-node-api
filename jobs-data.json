@@ -1,0 +1,212 @@
+[
+  {
+    "company": "TechNova",
+    "position": "React Developer",
+    "status": "PENDING",
+    "workType": "REMOTE",
+    "workLocation": "ISTANBUL"
+  },
+  {
+    "company": "BlueOcean Finance",
+    "position": "Backend Node.js Engineer",
+    "status": "INTERVIEW",
+    "workType": "FULL-TIME",
+    "workLocation": "ANKARA"
+  },
+  {
+    "company": "DataBird Analytics",
+    "position": "Data Scientist",
+    "status": "DECLINED",
+    "workType": "HYBRID",
+    "workLocation": "TURKEY"
+  },
+  {
+    "company": "Medion Health",
+    "position": "DevOps Engineer",
+    "status": "PENDING",
+    "workType": "FULL-TIME",
+    "workLocation": "İZMİR"
+  },
+  {
+    "company": "CloudShift",
+    "position": "AWS Cloud Architect",
+    "status": "PENDING",
+    "workType": "REMOTE",
+    "workLocation": "TURKEY"
+  },
+  {
+    "company": "NeoBank",
+    "position": "Fintech Product Manager",
+    "status": "INTERVIEW",
+    "workType": "ONSITE",
+    "workLocation": "ISTANBUL"
+  },
+  {
+    "company": "CyberGate Security",
+    "position": "Security Analyst",
+    "status": "PENDING",
+    "workType": "FULL-TIME",
+    "workLocation": "BURSA"
+  },
+  {
+    "company": "GreenLabs",
+    "position": "Environmental Engineer",
+    "status": "PENDING",
+    "workType": "HYBRID",
+    "workLocation": "ESKİŞEHİR"
+  },
+  {
+    "company": "RocketApps",
+    "position": "Mobile Flutter Developer",
+    "status": "PENDING",
+    "workType": "FULL-TIME",
+    "workLocation": "ISTANBUL"
+  },
+  {
+    "company": "QuantumSoft",
+    "position": "Machine Learning Engineer",
+    "status": "INTERVIEW",
+    "workType": "REMOTE",
+    "workLocation": "TURKEY"
+  },
+  {
+    "company": "AgroTech",
+    "position": "IoT Engineer",
+    "status": "PENDING",
+    "workType": "FULL-TIME",
+    "workLocation": "ADANA"
+  },
+  {
+    "company": "Buildify",
+    "position": "Construction Project Coordinator",
+    "status": "DECLINED",
+    "workType": "ONSITE",
+    "workLocation": "GAZİANTEP"
+  },
+  {
+    "company": "TravelHive",
+    "position": "Frontend Vue Developer",
+    "status": "PENDING",
+    "workType": "REMOTE",
+    "workLocation": "ANTALYA"
+  },
+  {
+    "company": "AutoVision",
+    "position": "AI Vision Engineer",
+    "status": "INTERVIEW",
+    "workType": "HYBRID",
+    "workLocation": "KOCAELİ"
+  },
+  {
+    "company": "SteelCore Industries",
+    "position": "Mechanical Engineer",
+    "status": "PENDING",
+    "workType": "ONSITE",
+    "workLocation": "KAYSERİ"
+  },
+  {
+    "company": "UrbanTech",
+    "position": "GIS Specialist",
+    "status": "PENDING",
+    "workType": "FULL-TIME",
+    "workLocation": "ANKARA"
+  },
+  {
+    "company": "PixelForge",
+    "position": "UI/UX Designer",
+    "status": "INTERVIEW",
+    "workType": "REMOTE",
+    "workLocation": "TURKEY"
+  },
+  {
+    "company": "EduWave",
+    "position": "Full Stack Java Instructor",
+    "status": "PENDING",
+    "workType": "HYBRID",
+    "workLocation": "ISTANBUL"
+  },
+  {
+    "company": "BlueCore Energy",
+    "position": "Electrical Engineer",
+    "status": "PENDING",
+    "workType": "FULL-TIME",
+    "workLocation": "ZONGULDAK"
+  },
+  {
+    "company": "VeloTech",
+    "position": "Bike Mechanics Engineer",
+    "status": "DECLINED",
+    "workType": "ONSITE",
+    "workLocation": "İZMİR"
+  },
+  {
+    "company": "PrimeWare",
+    "position": "Senior Angular Developer",
+    "status": "PENDING",
+    "workType": "REMOTE",
+    "workLocation": "TURKEY"
+  },
+  {
+    "company": "SilverLine Retail",
+    "position": "E-commerce Specialist",
+    "status": "INTERVIEW",
+    "workType": "FULL-TIME",
+    "workLocation": "ISTANBUL"
+  },
+  {
+    "company": "UrbanMove",
+    "position": "Logistics Coordinator",
+    "status": "PENDING",
+    "workType": "ONSITE",
+    "workLocation": "ANKARA"
+  },
+  {
+    "company": "FreshFoods",
+    "position": "Quality Assurance Specialist",
+    "status": "DECLINED",
+    "workType": "HYBRID",
+    "workLocation": "ANTALYA"
+  },
+  {
+    "company": "FinAudit",
+    "position": "Internal Auditor",
+    "status": "PENDING",
+    "workType": "FULL-TIME",
+    "workLocation": "ISTANBUL"
+  },
+  {
+    "company": "SkyLogistics",
+    "position": "Fleet Manager",
+    "status": "PENDING",
+    "workType": "ONSITE",
+    "workLocation": "MERSİN"
+  },
+  {
+    "company": "HyperDrive",
+    "position": "Embedded Systems Engineer",
+    "status": "PENDING",
+    "workType": "FULL-TIME",
+    "workLocation": "ESKİŞEHİR"
+  },
+  {
+    "company": "NanoLabs",
+    "position": "Chemical R&D Specialist",
+    "status": "INTERVIEW",
+    "workType": "HYBRID",
+    "workLocation": "KOCAELİ"
+  },
+  {
+    "company": "StarLink Telecom",
+    "position": "Network Administrator",
+    "status": "PENDING",
+    "workType": "ONSITE",
+    "workLocation": "ANKARA"
+  },
+  {
+    "company": "RoboWorks",
+    "position": "Robotics Engineer",
+    "status": "PENDING",
+    "workType": "FULL-TIME",
+    "workLocation": "ISTANBUL"
+  }
+]

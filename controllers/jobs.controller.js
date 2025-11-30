@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const Job = require("../models/jobs.model");
 
 // CREATE JOB
@@ -127,5 +128,131 @@ exports.deleteJobController = async (req, res) => {
     return res
       .status(500)
       .json({ success: false, message: "Internal server error" });
+  }
+};
+
+/* 
+  aggregate : , MongoDB’de veri üzerinde pipeline mantığıyla kompleks sorgular yapmamıza olanak sağlayan bir metod.
+  Basit find() sorgularından farklı olarak:
+
+  Filtreleme
+
+  Gruplama
+
+  Sıralama
+
+  Projeksiyon (istediğin alanları seçme)
+
+  Hesaplamalar (count, sum, avg vb.)
+
+  hepsini zincirleme olarak yapabilirsin.
+
+  Yani aggregate = veriyi adım adım işleyen bir boru hattı (pipeline).
+*/
+
+exports.getUserJobsController = async (req, res) => {
+  console.log("📩 Incoming getUserJobs request");
+  console.log("👤 Logged-in userId:", req.user.userId);
+
+  try {
+    const jobs = await Job.aggregate([
+      {
+        $match: {
+          createdBy: new mongoose.Types.ObjectId(req.user.userId),
+        },
+      },
+    ]);
+
+    console.log(`📄 Found ${jobs.length} jobs for user ${req.user.userId}`);
+    console.log("🗂 Jobs data:", jobs);
+
+    return res.status(200).json({
+      success: true,
+      count: jobs.length,
+      jobs,
+    });
+  } catch (error) {
+    console.error("❌ getUserJobsController error:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+      ...(process.env.NODE_ENV === "development" && { stack: error.stack }),
+    });
+  }
+};
+/* 
+group: _id = gruplanacak alan (status)
+
+count = her status’ün kaç tane olduğunu sayıyor ($sum:1)
+*/
+
+exports.getStatusJobsController = async (req, res) => {
+  try {
+    // Kullanıcıya ait job’ları status bazında gruplama
+    const stats = await Job.aggregate([
+      {
+        $match: { createdBy: new mongoose.Types.ObjectId(req.user.userId) },
+      },
+      {
+        $group: { _id: "$status", count: { $sum: 1 } },
+      },
+    ]);
+
+    const defaultStats = {
+      pending: stats.PENDING || 0,
+      reject: stats.REJECT || 0,
+      interview: stats.INTERVIEW || 0,
+    };
+
+    return res.status(200).json({
+      success: true,
+      count: stats.length,
+      defaultStats,
+      stats,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+      ...(process.env.NODE_ENV === "development" && { stack: error.stack }),
+    });
+  }
+};
+
+exports.getTopCompaniesController = async (req, res) => {
+  try {
+    const topCompanies = await Job.aggregate([
+      {
+        $group: {
+          _id: { company: "$company", status: "$status" },
+          count: { $sum: 1 },
+        },
+      },
+      {
+        $sort: { "_id.company": 1, "_id.status": -1 },
+      },
+      {
+        $project: {
+          _id: 0,
+          company: "$_id.company",
+          status: "$_id.status",
+          count: 1,
+        },
+      },
+      { $limit: 5 },
+    ]);
+
+    return res.status(200).json({
+      success: true,
+      totalCompanies: topCompanies.length,
+      topCompanies,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+      ...(process.env.NODE_ENV === "development" && { stack: error.stack }),
+    });
   }
 };
