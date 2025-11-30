@@ -256,3 +256,54 @@ exports.getTopCompaniesController = async (req, res) => {
     });
   }
 };
+
+exports.getFilteredJobsController = async (req, res) => {
+  console.log("📩 Incoming getUserJobs request");
+  console.log("👤 Logged-in userId:", req.user.userId);
+  console.log("🔍 Query params:", req.query);
+  
+
+  try {
+    const {status,company,sortBy,limit} = req.query ;
+
+    // dinamik match objesi oluştur 
+
+    const matchObj = {createdBy : new mongoose.Types.ObjectId(req.user.userId)};
+
+    if (status) matchObj.status = status.toUpperCase();
+    if (company) matchObj.company = company;
+
+    const jobsPipeline = [
+      {$match:matchObj}
+    ]
+
+     // Sort ekleme
+    if (sortBy) {
+      const [field, order] = sortBy.split(":"); // örnek: sortBy=createdAt:-1
+      jobsPipeline.push({ $sort: { [field]: parseInt(order) } });
+    }
+
+    // Limit ekleme
+    if (limit) {
+      jobsPipeline.push({ $limit: parseInt(limit) });
+    }
+
+    const jobs = await Job.aggregate(jobsPipeline);
+
+    console.log(`📄 Found ${jobs.length} jobs for user ${req.user.userId}`);
+    console.log("🗂 Jobs data:", jobs);
+
+  return res.status(200).json({
+      success: true,
+      count: jobs.length,
+      jobs,
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+      ...(process.env.NODE_ENV === "development" && { stack: error.stack }),
+    });
+  }
+};
