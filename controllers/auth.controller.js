@@ -88,6 +88,14 @@ exports.loginController = async (req, res, next) => {
 
     console.log("✅ Login successful:", email);
 
+    // Send JWT in HTTP-only cookie
+
+    res.cookie("token", token, {
+      expires: new Date(Date.now() + 86400000),
+      httpOnly: true,
+      secure: false,
+    });
+
     return res.status(200).json({
       success: true,
       message: "Login successful",

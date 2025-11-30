@@ -3,14 +3,23 @@ const JWT = require("jsonwebtoken");
 const userAuth = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization; // doğru isim
+    let token ;
 
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
-      console.warn("⚠ Authorization header missing or invalid");
-      return res.status(401).json({ message: "Unauthorized: Token missing or invalid" });
+    if (authHeader && authHeader.startsWith("Bearer ")) {
+     token = req.headers.authorization.split(" ")[1];
     }
 
-    const token = authHeader.split(" ")[1];
+    if(!token && req.cookies && req.cookies.token){
+      token = req.cookies.token;
+    }
 
+     if (!token) {
+      return res.status(401).json({
+        success: false,
+        message: "Unauthorized - Token not provided",
+      });
+    }
+    
     // Verify token
     const payload = JWT.verify(token, process.env.JWT_SECRET);
 
