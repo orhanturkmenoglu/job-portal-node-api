@@ -3,9 +3,10 @@ const cors = require("cors");
 const colors = require("colors");
 const routes = require("./routes/index");
 const setupSwagger = require("./config/swagger");
-const morgan = require("morgan");
 const errorMiddleware = require("./middlewares/error.middleware");
 const cookieParser = require("cookie-parser");
+const loggerMiddleware = require("./middlewares/logger.middleware");
+
 require("dotenv").config();
 
 // async route’larda try/catch yazmana gerek kalmaz, tüm hatalar otomatik global error middleware’e düşer.
@@ -22,8 +23,7 @@ app.use(cookieParser());
 
 app.use(express.json());
 
-// HTTP isteklerini konsola yazdırır (GET, POST, status code vs.)
-app.use(morgan("dev"));
+app.use(loggerMiddleware);
 
 app.use("/api/v1",routes);
 
