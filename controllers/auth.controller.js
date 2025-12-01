@@ -1,6 +1,5 @@
 const User = require("../models/user.model");
 const bcrypt = require("bcryptjs");
-const JWT = require("jsonwebtoken");
 const generateToken = require("../utils/generateToken");
 
 exports.registerController = async (req, res, next) => {
@@ -83,17 +82,11 @@ exports.loginController = async (req, res, next) => {
     user.password = undefined;
 
     // Generate JWT
-    const token = generateToken(user._id);
+    const token = generateToken(user._id,res);
 
     console.log("✅ Login successful:", email);
 
     // Send JWT in HTTP-only cookie
-
-    res.cookie("token", token, {
-      expires: new Date(Date.now() + 86400000),
-      httpOnly: true,
-      secure: false,
-    });
 
     return res.status(200).json({
       success: true,
