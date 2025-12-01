@@ -1,6 +1,7 @@
 const User = require("../models/user.model");
 const bcrypt = require("bcryptjs");
 const JWT = require("jsonwebtoken");
+const generateToken = require("../utils/generateToken");
 
 exports.registerController = async (req, res, next) => {
   console.log("📩 Incoming Register Request:");
@@ -82,9 +83,7 @@ exports.loginController = async (req, res, next) => {
     user.password = undefined;
 
     // Generate JWT
-    const token = JWT.sign({ userId: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "8h",
-    });
+    const token = generateToken(user._id);
 
     console.log("✅ Login successful:", email);
 
