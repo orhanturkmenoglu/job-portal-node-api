@@ -82,7 +82,21 @@ router.post("/register", registerController);
 router.post("/login", loginController);
 
 
+/**
+ * @swagger
+ * /auth/logout:
+ *   post:
+ *     summary: Logout user (clears JWT cookie)
+ *     tags: [Auth]
+ *     description: |
+ *       Logs out the authenticated user by clearing the JWT token stored in HTTP-only cookies.
+ *       On client-side, you should also remove any Authorization header if stored manually.
+ *     responses:
+ *       200:
+ *         description: User logged out successfully
+ *       500:
+ *         description: Internal server error
+ */
 router.post("/logout", logoutController);
-
 
 module.exports = router;
